@@ -21,18 +21,21 @@ function isDirectory(path) {
 function readDirContentAndReadFileAndFindManagedResource(path) {
     content = fs.readdirSync(path);
     var contentForEach = [];
-    //
     for (var i = 0; i < content.length; i++) {
         contentForEach.push(readFileAndFind(path + content[i]));
     }
     
     return contentForEach;
-
+    
 }
 
 
 
 
 
+
 //console.log(readDirContentAndReadFileAndFindManagedResource("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo/Content/"));
-console.log(readDirContentAndReadFileAndFindManagedResource("/Users/viniciussoares/Desktop/Algar_Telecom/algarcrm/algarcrm/source/modules/phone"));
+//console.log(readDirContentAndReadFileAndFindManagedResource("/Users/viniciussoares/Desktop/Algar_Telecom/algarcrm/algarcrm/source/modules/phone"));
+
+
+console.log(isDirectory("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo/Content/"));
