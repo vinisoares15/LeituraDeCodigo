@@ -11,7 +11,6 @@ function readFileAndFind(file) {
     }
 }
 
-
 // Função que vai varrer o diretório e chamar a função readFileAndFind
 var walk = function (dir, done) {
     var results = [];
@@ -38,8 +37,7 @@ var walk = function (dir, done) {
 };
 
 
-
-walk("/Users/viniciussoares/Desktop/Algar_Telecom/algarcrm/algarcrm/source/modules/sales/src/main/java/br/com/algartelecom/", function (err, results) {
+walk("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo", function (err, results) {
     if (err) throw err;
     console.log(results);
 });
