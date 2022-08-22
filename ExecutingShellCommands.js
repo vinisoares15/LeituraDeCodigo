@@ -1,15 +1,24 @@
 const { exec } = require("child_process");
 
+function gitBlame(file, callback) {
+    exec(`git blame ${file}`, (err, stdout, stderr) => {
+        var Blame = [];
+        if (err) {
+            // node couldn't execute the command
+            return;
+        }
+        //atribuir o resultado do git blame para o array Blame
+        Blame.push(stdout);
+    }
+    );
+}
+        // the *entire* stdout and stderr (buffered)
+//        console.log(`stdout: ${stdout}`);
+//        console.log(`stderr: ${stderr}`);
 
 
-exec(`git blame ${file}`, (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
-});
+gitBlame("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo/ReadFile3.js")
+
+console.log(Blame);
+
+

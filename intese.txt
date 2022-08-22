@@ -1,0 +1,10 @@
+Vai ler e procurar por managed resource
+    Se achar managed resource ou managed Atrribute
+        dar git blame no ${file} ${linha-que-está-a-notação}
+            
+            if(a data do git blame for maior que 2 anos)
+        retornar warning dizendo que eh overdated
+        else
+        
+    retornar warning
+

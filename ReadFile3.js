@@ -1,13 +1,31 @@
+const { exec } = require('child_process');
 var fs = require('fs');
 var path = require('path');
+const { stdout } = require('process');
 
+var Blame = [];
 // Para encontrar o termo lendo o arquivo
 function readFileAndFind(file) {
     var content = fs.readFileSync(file, 'utf8');
-    if (content.includes('ManagedResource')) {
-        return "Possui Managed Resource e o pwd é:" + file;
+    if (content.includes('ManagedResource' || 'ManagedAttribute')) {
+        //executar comando shell para pegar o pwd do arquivo
+        
+        exec(`git blame ${file}`, (err, stdout, stderr) => {
+            if (err) {
+                // node couldn't execute the command
+                return;
+            }
+            // the *entire* stdout and stderr (buffered)
+            //console.log(`stdout: ${stdout}`);
+            //console.log(`stderr: ${stderr}`);
+            Blame.push(stdout);
+        }
+        );
+        //fim da função exec shell
+
+        return "Possui notação e o pwd é:" + file + Blame;
     } else {
-        return ".";
+        return "";
     }
 }
 
@@ -36,8 +54,6 @@ var walk = function (dir, done) {
         })();
     });
 };
-
-
 //Usage
 
 walk("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo", function (err, results) {
