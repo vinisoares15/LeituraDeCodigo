@@ -3,13 +3,15 @@ var fs = require('fs');
 var path = require('path');
 const { stdout } = require('process');
 
+
 var Blame = [];
 // Para encontrar o termo lendo o arquivo
 function readFileAndFind(file) {
     var content = fs.readFileSync(file, 'utf8');
     if (content.includes('ManagedResource' || 'ManagedAttribute')) {
-        //executar comando shell para pegar o pwd do arquivo
-        
+        //mostrar a linha onde foi encontrado o termo
+        //var line = content.indexOf('ManagedResource');
+        //executar comando shell para pegar o blame do arquivo, usar o parâmetro "-L ${line}"" para mostrar a linha
         exec(`git blame ${file}`, (err, stdout, stderr) => {
             if (err) {
                 // node couldn't execute the command
@@ -22,13 +24,14 @@ function readFileAndFind(file) {
         }
         );
         //fim da função exec shell
+        setTimeout(function () {    
+        }, 1000);
 
-        return "Possui notação e o pwd é:" + file + Blame;
+        return "Warning/pwd:" + file + Blame;
     } else {
         return "";
     }
 }
-
 
 // Função que vai varrer o diretório e chamar a função readFileAndFind
 var walk = function (dir, done) {
@@ -54,9 +57,45 @@ var walk = function (dir, done) {
         })();
     });
 };
-//Usage
 
-walk("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo", function (err, results) {
+/**
+ * Testando a função com data local e sem filtro (working)
+ */
+ walk("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo/", function (err, results) {
     if (err) throw err;
     console.log(results);
 });
+
+
+
+
+/**
+ * Testando a função com data local e com filtro (working)
+ */
+
+// walk("/Users/viniciussoares/Desktop/Algar_Telecom/LeituraDoCodigo/", function (err, results) {
+//     if (err) throw err;
+//  //mostrar apenas termos não nulos e não vazios
+//     var filtered = results.filter(function (item) {
+//     return item !== "";
+//     }).join("\n");
+//     console.log(filtered);
+
+// });
+
+
+/**
+ * Testando a função com data do algarcrm e com filtro 
+ *
+ */
+
+// walk("/Users/viniciussoares/Desktop/Algar_Telecom/algarcrm/algarcrm/source/modules/phone/", function (err, results) {
+//     if (err) throw err;
+    
+//     mostrar apenas termos não nulos e não vazios
+//     var filtered = results.filter(function (item) {
+//         return item !== "";
+//     }).join("\n");
+//     console.log(filtered);
+//     console.log(results);
+// });
