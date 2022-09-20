@@ -2,4 +2,4 @@ asd
 asda
 sd
 asdas
-ManagedResource
+@ManagedResource
