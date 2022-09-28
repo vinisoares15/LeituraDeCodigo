@@ -5,6 +5,7 @@ var aceleracao = function (velocidade, tempo) {
 
 
 
+
 if (content.includes('ManagedResource' || 'ManagedAttribute' || 'ApplicationProperty')) {
     //mostrar a linha onde foi encontrado o termo
      lineini = content.indexOf('ManagedResource');
